@@ -1,0 +1,6 @@
+version: "3"
+tasks:
+  gen:
+    desc: "generating Go files from proto"
+    cmd:
+      protoc -I api/proto api/proto/auth.proto --go_out=./gen --go_opt=paths=source_relative --go-grpc_out=./gen --go-grpc_opt=paths=source_relative
