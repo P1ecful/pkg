@@ -6,15 +6,20 @@ option go_package = "./gen";
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse)  {}
   rpc Login(LoginRequest) returns (LoginResponse)           {}
+  rpc Logout(LogoutRequest) returns (LogoutResponse) {}
 }
 
 message RegisterRequest {
-  string Email = 2;
-  string Password = 3;
+  string FirstName = 1;
+  string MiddleName = 2;
+  string LastName = 3;
+  string Login = 4;
+  string Email = 5;
+  string Password = 6;
 }
 
 message RegisterResponse {
-  string response = 1;
+  string Status = 1;
 }
 
 message LoginRequest {
@@ -24,4 +29,11 @@ message LoginRequest {
 
 message LoginResponse {
   string Token = 1;
+}
+
+message LogoutRequest {
+  string Token = 1;
+}
+message LogoutResponse{
+  string Response = 1;
 }
