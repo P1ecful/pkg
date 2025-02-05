@@ -4,11 +4,14 @@ package gen;
 option go_package = "./gen/grpc/auth";
 
 service Auth {
-  rpc Register(RegisterRequest) returns (RegisterResponse)              {}
-  rpc Login(LoginRequest) returns (LoginResponse)                       {}
-  rpc Logout(LogoutRequest) returns (LogoutResponse)                    {}
-  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse)  {}
+  rpc Register(RegisterRequest) returns (RegisterResponse)                                            {}
+  rpc Login(LoginRequest) returns (LoginResponse)                                                     {}
+  rpc Logout(LogoutRequest) returns (LogoutResponse)                                                  {}
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse)                                {}
+  rpc GetDataFromAccessToken(GetDataFromAccessTokenRequest) returns (GetDataFromAccessTokenResponse)  {}
+  rpc isAdmin(isAdminRequest) returns (isAdminResponse)                                               {}
 }
+
 
 message RegisterRequest {
   string Email = 1;
@@ -50,4 +53,18 @@ message RefreshTokenRequest{
 message RefreshTokenResponse{
   string Token = 1;
   string Refresh = 2;
+}
+
+message GetDataFromAccessTokenRequest{
+  string Token = 1;
+}
+message GetDataFromAccessTokenResponse{
+  string Email = 1;
+}
+
+message isAdminRequest{
+  string Token = 1;
+}
+message isAdminResponse{
+  string Response = 1;
 }
