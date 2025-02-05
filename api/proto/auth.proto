@@ -12,13 +12,11 @@ service Auth {
   rpc isAdmin(isAdminRequest) returns (isAdminResponse)                                               {}
 }
 
-
 message RegisterRequest {
   string Email = 1;
   string Password = 2;
 }
 
-// RegisterResponse returns status register status
 message RegisterResponse {
   string Status = 1;
 }
@@ -28,7 +26,6 @@ message LoginRequest {
   string Password = 2;
 }
 
-// LoginResponse returns access and refresh tokens for user
 message LoginResponse {
   string Token = 1;
   string Refresh = 2;
@@ -38,8 +35,6 @@ message LogoutRequest {
   string Token = 1;
 }
 
-// LogoutResponse refresh tokens and doesn't return new token to user
-// LogoutResponse returns logout status
 message LogoutResponse{
   string Response = 1;
 }
@@ -49,7 +44,6 @@ message RefreshTokenRequest{
   string Refresh = 2;
 }
 
-// RefreshTokenResponse returns new pair of tokens
 message RefreshTokenResponse{
   string Token = 1;
   string Refresh = 2;

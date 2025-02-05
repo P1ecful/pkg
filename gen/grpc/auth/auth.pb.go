@@ -72,7 +72,6 @@ func (x *RegisterRequest) GetPassword() string {
 	return ""
 }
 
-// RegisterResponse returns status register status
 type RegisterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        string                 `protobuf:"bytes,1,opt,name=Status,proto3" json:"Status,omitempty"`
@@ -169,7 +168,6 @@ func (x *LoginRequest) GetPassword() string {
 	return ""
 }
 
-// LoginResponse returns access and refresh tokens for user
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=Token,proto3" json:"Token,omitempty"`
@@ -266,8 +264,6 @@ func (x *LogoutRequest) GetToken() string {
 	return ""
 }
 
-// LogoutResponse refresh tokens and doesn't return new token to user
-// LogoutResponse returns logout status
 type LogoutResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Response      string                 `protobuf:"bytes,1,opt,name=Response,proto3" json:"Response,omitempty"`
@@ -364,7 +360,6 @@ func (x *RefreshTokenRequest) GetRefresh() string {
 	return ""
 }
 
-// RefreshTokenResponse returns new pair of tokens
 type RefreshTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=Token,proto3" json:"Token,omitempty"`
