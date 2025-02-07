@@ -9,7 +9,6 @@ service Auth {
   rpc Logout(LogoutRequest) returns (LogoutResponse)                                                  {}
   rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse)                                {}
   rpc GetDataFromAccessToken(GetDataFromAccessTokenRequest) returns (GetDataFromAccessTokenResponse)  {}
-  rpc isAdmin(isAdminRequest) returns (isAdminResponse)                                               {}
 }
 
 message RegisterRequest {
@@ -54,11 +53,4 @@ message GetDataFromAccessTokenRequest{
 }
 message GetDataFromAccessTokenResponse{
   string Email = 1;
-}
-
-message isAdminRequest{
-  string Token = 1;
-}
-message isAdminResponse{
-  string Response = 1;
 }

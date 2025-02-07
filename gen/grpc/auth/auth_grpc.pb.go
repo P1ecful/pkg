@@ -24,7 +24,6 @@ const (
 	Auth_Logout_FullMethodName                 = "/gen.Auth/Logout"
 	Auth_RefreshToken_FullMethodName           = "/gen.Auth/RefreshToken"
 	Auth_GetDataFromAccessToken_FullMethodName = "/gen.Auth/GetDataFromAccessToken"
-	Auth_IsAdmin_FullMethodName                = "/gen.Auth/isAdmin"
 )
 
 // AuthClient is the client API for Auth service.
@@ -36,7 +35,6 @@ type AuthClient interface {
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	GetDataFromAccessToken(ctx context.Context, in *GetDataFromAccessTokenRequest, opts ...grpc.CallOption) (*GetDataFromAccessTokenResponse, error)
-	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 }
 
 type authClient struct {
@@ -97,16 +95,6 @@ func (c *authClient) GetDataFromAccessToken(ctx context.Context, in *GetDataFrom
 	return out, nil
 }
 
-func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsAdminResponse)
-	err := c.cc.Invoke(ctx, Auth_IsAdmin_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
@@ -116,7 +104,6 @@ type AuthServer interface {
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	GetDataFromAccessToken(context.Context, *GetDataFromAccessTokenRequest) (*GetDataFromAccessTokenResponse, error)
-	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -141,9 +128,6 @@ func (UnimplementedAuthServer) RefreshToken(context.Context, *RefreshTokenReques
 }
 func (UnimplementedAuthServer) GetDataFromAccessToken(context.Context, *GetDataFromAccessTokenRequest) (*GetDataFromAccessTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataFromAccessToken not implemented")
-}
-func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -256,24 +240,6 @@ func _Auth_GetDataFromAccessToken_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsAdminRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).IsAdmin(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Auth_IsAdmin_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).IsAdmin(ctx, req.(*IsAdminRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -300,10 +266,6 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDataFromAccessToken",
 			Handler:    _Auth_GetDataFromAccessToken_Handler,
-		},
-		{
-			MethodName: "isAdmin",
-			Handler:    _Auth_IsAdmin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
