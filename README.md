@@ -1,4 +1,4 @@
-## proto, openapi gen and other
+## proto, openapi-gen, s3, custom types, db test, routes test
 
 
-#### git tag -a v0.0.1 -m "v0.0.1"
+#### git tag -a v0.1.0 -m "v0.1.0"

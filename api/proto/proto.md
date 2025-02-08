@@ -1,0 +1,1 @@
+## Прото файл и его генерация для github.com/P1ecful/grpc-jwt-test
