@@ -6,8 +6,6 @@ option go_package = "./gen/grpc/auth";
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse)                                            {}
   rpc Login(LoginRequest) returns (LoginResponse)                                                     {}
-  rpc Logout(LogoutRequest) returns (LogoutResponse)                                                  {}
-  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse)                                {}
   rpc GetDataFromAccessToken(GetDataFromAccessTokenRequest) returns (GetDataFromAccessTokenResponse)  {}
 }
 
@@ -26,24 +24,6 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string Token = 1;
-  string Refresh = 2;
-}
-
-message LogoutRequest {
-  string Token = 1;
-}
-
-message LogoutResponse{
-  string Response = 1;
-}
-
-message RefreshTokenRequest{
-  string Token = 1;
-  string Refresh = 2;
-}
-
-message RefreshTokenResponse{
   string Token = 1;
   string Refresh = 2;
 }
