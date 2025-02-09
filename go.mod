@@ -3,7 +3,9 @@ module github.com/P1ecful/pkg
 go 1.22.10
 
 require (
+	github.com/antihax/optional v1.0.0
 	go.uber.org/mock v0.5.0
+	golang.org/x/oauth2 v0.24.0
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
 )

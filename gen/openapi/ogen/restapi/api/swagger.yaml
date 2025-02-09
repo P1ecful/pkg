@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  title: openapi-gen mysql slog echo
+  description: simple crud
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+paths:
+  /product/create:
+    post:
+      summary: Create
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreate"
+        required: true
+      responses:
+        "201":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Validate error
+  /products/{product_id}:
+    get:
+      summary: Get by ID
+      operationId: getProductById
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+    put:
+      summary: Update product
+      operationId: updateProduct
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdate"
+        required: true
+      responses:
+        "200":
+          description: Updated product
+        "404":
+          description: Product not found
+        "400":
+          description: Validate Error
+    delete:
+      summary: Delete product
+      operationId: deleteProduct
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Product deleted
+        "404":
+          description: product not found
+  /product/:
+    get:
+      summary: Get all product with params or not
+      operationId: getProducts
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: offset
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: ORDER_by
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: cheaper
+          enum:
+          - cheaper
+          - morex
+      responses:
+        "200":
+          description: Products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+                x-content-type: application/json
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        price:
+          type: number
+          format: float
+      example:
+        price: 0.8008282
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    ProductCreate:
+      required:
+      - name
+      - price
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+          format: float
+    ProductUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+          format: float

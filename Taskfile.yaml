@@ -13,7 +13,7 @@ tasks:
   gen-api:
     desc: "generating go files from swagger/openapi file"
     cmd:
-      echo "gen ogen"
+      swagger-codegen generate -i ./api/openapi/openapi.yaml -l go -o ./gen/openapi/
 
   logger-test:
     desc: "Runs logger tests"
