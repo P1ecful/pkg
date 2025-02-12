@@ -10,3 +10,9 @@
 ``` sh
     $ task <command>
 ```
+
+### Versions
+```
+    v0.1.1 - jwt-grpc-test
+    v0.2.0 - ogen-test
+```

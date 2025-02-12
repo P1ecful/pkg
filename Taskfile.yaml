@@ -15,4 +15,3 @@ tasks:
     cmd:
       swagger-codegen generate -i ./api/openapi/openapi.yaml -l go -o ./gen/openapi/
 
-
