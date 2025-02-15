@@ -1,1 +1,0 @@
-## Спека и ее генерация для github.com/P1ecful/ogen-test
